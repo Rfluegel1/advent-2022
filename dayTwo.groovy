@@ -20,6 +20,8 @@ abstract class Shape {
         return letters.contains(letter)
     }
 
+    
+
     abstract Result resultOfBattling(Shape other)
 
     abstract Shape getShapeForResult(Result result)
@@ -111,14 +113,14 @@ class Scissor extends Shape {
 
 List strategies = input.split '\n'
 
-def partOne(List strategies) {
+void partOne(List strategies) {
     int totalPoints = 0
     strategies.each { String strategy ->
         List shapeChoices = strategy.split(' ').collect { determineShape(it) }
 
-        def opponents = shapeChoices.first()
-        def yours = shapeChoices.last()
-        totalPoints += yours.value + yours.resultOfBattling(opponents).value
+        Shape opponents = shapeChoices.first()
+        Shape your = shapeChoices.last()
+        totalPoints += your.value + your.resultOfBattling(opponents).value
     }
 
     println(totalPoints)
@@ -126,14 +128,14 @@ def partOne(List strategies) {
 
 partOne(strategies)
 
-def partTwo(List strategies) {
+void partTwo(List strategies) {
     int totalPoints = 0
     strategies.each { String strategy ->
-
-        def opponents = determineShape(strategy.split(' ').first())
-        def result = determineResult(strategy.split(' ').last())
-        def yours = opponents.getShapeForResult(result)
-        totalPoints += yours.value + yours.resultOfBattling(opponents).value
+        List splitStrategies = strategy.split(' ')
+        Shape opponents = determineShape(splitStrategies.first())
+        Result result = determineResult(splitStrategies.last())
+        Shape your = opponents.getShapeForResult(result)
+        totalPoints += your.value + your.resultOfBattling(opponents).value
     }
 
     println(totalPoints)

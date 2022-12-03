@@ -1,5 +1,3 @@
-List rucksacks = input.split '\n'
-
 def partOne(List rucksacks) {
 
     int runningTotal = 0

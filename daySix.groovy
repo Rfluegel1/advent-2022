@@ -4,6 +4,10 @@ def printMarkerIndex(String input, int markerLength) {
         if (characters[i..i + markerLength - 1].toSet().size() == markerLength) {
             println(i + markerLength)
             break
+        } else {
+            def duplicateChar = characters[i]
+            int firstIndexOfChar = characters[i..i + markerLength - 1].indexOf(duplicateChar)
+            i += firstIndexOfChar
         }
     }
 }
